@@ -15,22 +15,20 @@
           
           element.style.borderRadius = '1em';  // Add border-radius to the original element
           element.style.position = 'relative';
-          element.style.zIndex = '2';  // Adjust z-index to ensure gradient border overlays original border
+          element.style.zIndex = '2';  // Adjust z-index to ensure solid color border overlays original border
 
-          const gradientBorderDiv = document.createElement('div');
-          gradientBorderDiv.style.position = 'absolute';
-          gradientBorderDiv.style.top = '0';
-          gradientBorderDiv.style.left = '0';
-          gradientBorderDiv.style.right = '0';
-          gradientBorderDiv.style.bottom = '0';
-          gradientBorderDiv.style.border = '1px solid transparent';
-          gradientBorderDiv.style.borderImage = 'linear-gradient(to bottom right, #6EACEB, #C672F6) 1';
-          gradientBorderDiv.style.borderImageSlice = '1';
-          gradientBorderDiv.style.borderRadius = '1em';
-          gradientBorderDiv.style.pointerEvents = 'none';
-          gradientBorderDiv.style.zIndex = '1';
+          const solidColorBorderDiv = document.createElement('div');
+          solidColorBorderDiv.style.position = 'absolute';
+          solidColorBorderDiv.style.top = '0';
+          solidColorBorderDiv.style.left = '0';
+          solidColorBorderDiv.style.right = '0';
+          solidColorBorderDiv.style.bottom = '0';
+          solidColorBorderDiv.style.border = '1px solid #9190F0';  // Solid color border
+          solidColorBorderDiv.style.borderRadius = '1em';
+          solidColorBorderDiv.style.pointerEvents = 'none';
+          solidColorBorderDiv.style.zIndex = '1';
 
-          element.appendChild(gradientBorderDiv);
+          element.appendChild(solidColorBorderDiv);
 
           const iconDiv = document.createElement('div');
           iconDiv.style.position = 'absolute';
@@ -40,7 +38,7 @@
           iconDiv.style.height = '20px';
           iconDiv.style.backgroundImage = 'url(/uploads/db4787/original/1X/4f39ad0e50e8edea643f4fd6b6cc2ba5c91a32b8.png)';
           iconDiv.style.backgroundSize = 'cover';
-          iconDiv.style.zIndex = '3';  // Adjust z-index to ensure icon overlays gradient border
+          iconDiv.style.zIndex = '3';  // Adjust z-index to ensure icon overlays solid color border
           
           element.appendChild(iconDiv);
 
