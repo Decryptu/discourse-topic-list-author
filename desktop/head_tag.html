@@ -15,6 +15,7 @@
           element.style.borderImage = 'linear-gradient(to bottom right, #6EACEB, #C672F6) 1';
           element.style.borderImageSlice = '1';
           element.style.borderWidth = '1px';
+          element.style.borderRadius = '1em';  // Added border-radius property here
           element.style.position = 'relative';
           element.style.overflow = 'hidden';
 
@@ -29,7 +30,7 @@
           iconDiv.style.zIndex = '1';
           element.appendChild(iconDiv);
 
-          console.log('Couleur de la bordure et icône ajoutées pour le sujet créé par', topicCreatorUsername);
+          console.log('Couleur de la bordure, icône et bord arrondi ajoutés pour le sujet créé par', topicCreatorUsername);
         });
       } else {
         console.log('Le créateur du sujet n\'est pas un administrateur. Aucune modification de la couleur de la bordure ou icône ajoutée.');
