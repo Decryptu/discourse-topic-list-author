@@ -13,7 +13,8 @@
         Ember.run.scheduleOnce('afterRender', this, function() {
           const element = this.element.closest('.topic-list-item');
           element.style.borderImage = 'linear-gradient(to bottom right, #6EACEB, #C672F6) 1';
-          element.style.border = '1px solid';
+          element.style.borderImageSlice = '1';
+          element.style.borderWidth = '1px';
           element.style.position = 'relative';
           element.style.overflow = 'hidden';
 
