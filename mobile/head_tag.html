@@ -1,3 +1,56 @@
+<script type="text/discourse-plugin" version="0.8">
+  const adminUsernames = ['wil', 'decrypt', 'prof.chaine', 'thomas', 'cyp', 'coban', 'virtus', 'robin'].map(username => username.toLowerCase());
+
+  api.modifyClass('component:topic-list-item', {
+    didInsertElement() {
+      this._super(...arguments);
+      const topicCreatorUsername = this.get('topic.creator.username').toLowerCase();
+
+      console.log('Pseudo du créateur du sujet :', topicCreatorUsername);
+
+      if (adminUsernames.includes(topicCreatorUsername)) {
+        console.log('Le créateur du sujet est un administrateur. Modification de la couleur de la bordure...');
+        Ember.run.scheduleOnce('afterRender', this, function() {
+          const element = this.element.closest('.topic-list-item');
+          
+          element.style.borderRadius = '1em';  // Add border-radius to the original element
+          element.style.position = 'relative';
+          element.style.zIndex = '2';  // Adjust z-index to ensure solid color border overlays original border
+
+          const solidColorBorderDiv = document.createElement('div');
+          solidColorBorderDiv.style.position = 'absolute';
+          solidColorBorderDiv.style.top = '0';
+          solidColorBorderDiv.style.left = '0';
+          solidColorBorderDiv.style.right = '0';
+          solidColorBorderDiv.style.bottom = '0';
+          solidColorBorderDiv.style.border = '1px solid #9190F0';  // Solid color border
+          solidColorBorderDiv.style.borderRadius = '0.9em';
+          solidColorBorderDiv.style.pointerEvents = 'none';
+          solidColorBorderDiv.style.zIndex = '1';
+
+          element.appendChild(solidColorBorderDiv);
+
+          const iconDiv = document.createElement('div');
+          iconDiv.style.position = 'absolute';
+          iconDiv.style.top = '10px';
+          iconDiv.style.left = '10px';
+          iconDiv.style.width = '20px';
+          iconDiv.style.height = '20px';
+          iconDiv.style.backgroundImage = 'url(/uploads/db4787/original/1X/4f39ad0e50e8edea643f4fd6b6cc2ba5c91a32b8.png)';
+          iconDiv.style.backgroundSize = 'cover';
+          iconDiv.style.zIndex = '3';  // Adjust z-index to ensure icon overlays solid color border
+          
+          element.appendChild(iconDiv);
+
+          console.log('Couleur de la bordure, icône et bord arrondi ajoutés pour le sujet créé par', topicCreatorUsername);
+        });
+      } else {
+        console.log('Le créateur du sujet n\'est pas un administrateur. Aucune modification de la couleur de la bordure ou icône ajoutée.');
+      }
+    }
+  });
+</script>
+
 <script
   type="text/x-handlebars"
   data-template-name="mobile/list/topic-list-item.raw"
