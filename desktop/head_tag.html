@@ -13,25 +13,23 @@
         Ember.run.scheduleOnce('afterRender', this, function() {
           const element = this.element.closest('.topic-list-item');
 
+          const gradientBorderDiv = document.createElement('div');
+          gradientBorderDiv.style.position = 'absolute';
+          gradientBorderDiv.style.top = '0';
+          gradientBorderDiv.style.left = '0';
+          gradientBorderDiv.style.right = '0';
+          gradientBorderDiv.style.bottom = '0';
+          gradientBorderDiv.style.border = '1px solid transparent';
+          gradientBorderDiv.style.borderImage = 'linear-gradient(to bottom right, #6EACEB, #C672F6) 1';
+          gradientBorderDiv.style.borderImageSlice = '1';
+          gradientBorderDiv.style.borderRadius = '1em';
+          gradientBorderDiv.style.pointerEvents = 'none';
+          gradientBorderDiv.style.zIndex = '1';
+
           element.style.position = 'relative';
-          element.style.padding = '1px';  // Adjust the padding to accommodate the gradient border
-          element.style.background = 'linear-gradient(to bottom right, #6EACEB, #C672F6)';
-          element.style.borderRadius = '1em';
           element.style.overflow = 'hidden';
 
-          const contentDiv = document.createElement('div');
-          contentDiv.style.background = '#ffffff';  // Assumes the background color of the original element is white
-          contentDiv.style.borderRadius = '1em';
-          contentDiv.style.margin = '-1px';  // Adjusts the margin to overlay the gradient border
-          contentDiv.style.position = 'relative';
-          contentDiv.style.zIndex = '1';
-
-          // Move all the child nodes of the original element into contentDiv
-          while (element.firstChild) {
-            contentDiv.appendChild(element.firstChild);
-          }
-
-          element.appendChild(contentDiv);
+          element.appendChild(gradientBorderDiv);
 
           const iconDiv = document.createElement('div');
           iconDiv.style.position = 'absolute';
@@ -42,7 +40,7 @@
           iconDiv.style.backgroundImage = 'url(/uploads/db4787/original/1X/4f39ad0e50e8edea643f4fd6b6cc2ba5c91a32b8.png)';
           iconDiv.style.backgroundSize = 'cover';
           iconDiv.style.zIndex = '2';
-          contentDiv.appendChild(iconDiv);
+          element.appendChild(iconDiv);
 
           console.log('Couleur de la bordure, icône et bord arrondi ajoutés pour le sujet créé par', topicCreatorUsername);
         });
