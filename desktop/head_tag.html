@@ -1,3 +1,26 @@
+<script type="text/discourse-plugin" version="0.8">
+  const adminUsernames = ['wil', 'decrypt', 'prof.chaine', 'thomas', 'cyp', 'coban', 'virtus', 'robin'];
+
+  api.modifyClass('component:topic-list-item', {
+    didInsertElement() {
+      this._super(...arguments);
+      const topicCreatorUsername = this.get('topic.creator.username');
+
+      console.log('Pseudo du créateur du sujet :', topicCreatorUsername);
+
+      if (adminUsernames.includes(topicCreatorUsername)) {
+        console.log('Le créateur du sujet est un administrateur. Modification de la couleur de la bordure...');
+        Ember.run.scheduleOnce('afterRender', this, function() {
+          this.$().closest('.topic-list-item').css('border', '1px solid #71A9EC');
+          console.log('Couleur de la bordure modifiée pour le sujet créé par', topicCreatorUsername);
+        });
+      } else {
+        console.log('Le créateur du sujet n\'est pas un administrateur. Aucune modification de la couleur de la bordure.');
+      }
+    }
+  });
+</script>
+
 <script type="text/x-handlebars" data-template-name="list/topic-list-item.raw">
 
     {{#if showParticipants}}
@@ -371,10 +394,7 @@
   {{/if}}
 </script>
 
-<script
-  type="text/x-handlebars"
-  data-template-name="components/latest-topic-list-item"
->
+<script type="text/x-handlebars" data-template-name="components/latest-topic-list-item">
 
   {{#if (theme-setting 'show_topic_author_column_last_on_categories_page')}}
   <PluginOutlet @name="above-latest-topic-list-item" @connectorTagName="div" />
