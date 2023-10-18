@@ -11,35 +11,23 @@
       if (adminUsernames.includes(topicCreatorUsername)) {
         console.log('Le créateur du sujet est un administrateur. Modification de la couleur de la bordure...');
         Ember.run.scheduleOnce('afterRender', this, function() {
-          this.$().closest('.topic-list-item').css({
-            position: 'relative',
-            overflow: 'hidden',
-            padding: '2px',  // Adjust padding to control border thickness
-          });
-          this.$().closest('.topic-list-item').append(`
-            <div class="gradient-border"></div>
-            <div class="admin-icon"></div>
-          `);
-          $('.gradient-border').css({
-            content: '',
-            position: 'absolute',
-            top: 0,
-            right: 0,
-            bottom: 0,
-            left: 0,
-            'background-image': 'linear-gradient(to bottom right, #6EACEB, #C672F6)',
-            'z-index': -1,
-          });
-          $('.admin-icon').css({
-            position: 'absolute',
-            top: '10px',
-            right: '10px',
-            width: '20px',  // Adjust width as needed
-            height: '20px',  // Adjust height as needed
-            'background-image': 'url(/uploads/db4787/original/1X/4f39ad0e50e8edea643f4fd6b6cc2ba5c91a32b8.png)',
-            'background-size': 'cover',
-            'z-index': 1,
-          });
+          const element = this.element.closest('.topic-list-item');
+          element.style.borderImage = 'linear-gradient(to bottom right, #6EACEB, #C672F6) 1';
+          element.style.border = '1px solid';
+          element.style.position = 'relative';
+          element.style.overflow = 'hidden';
+
+          const iconDiv = document.createElement('div');
+          iconDiv.style.position = 'absolute';
+          iconDiv.style.top = '10px';
+          iconDiv.style.right = '10px';
+          iconDiv.style.width = '20px';
+          iconDiv.style.height = '20px';
+          iconDiv.style.backgroundImage = 'url(/uploads/db4787/original/1X/4f39ad0e50e8edea643f4fd6b6cc2ba5c91a32b8.png)';
+          iconDiv.style.backgroundSize = 'cover';
+          iconDiv.style.zIndex = '1';
+          element.appendChild(iconDiv);
+
           console.log('Couleur de la bordure et icône ajoutées pour le sujet créé par', topicCreatorUsername);
         });
       } else {
