@@ -12,6 +12,10 @@
         console.log('Le créateur du sujet est un administrateur. Modification de la couleur de la bordure...');
         Ember.run.scheduleOnce('afterRender', this, function() {
           const element = this.element.closest('.topic-list-item');
+          
+          element.style.borderRadius = '1em';  // Add border-radius to the original element
+          element.style.position = 'relative';
+          element.style.zIndex = '2';  // Adjust z-index to ensure gradient border overlays original border
 
           const gradientBorderDiv = document.createElement('div');
           gradientBorderDiv.style.position = 'absolute';
@@ -26,9 +30,6 @@
           gradientBorderDiv.style.pointerEvents = 'none';
           gradientBorderDiv.style.zIndex = '1';
 
-          element.style.position = 'relative';
-          element.style.overflow = 'hidden';
-
           element.appendChild(gradientBorderDiv);
 
           const iconDiv = document.createElement('div');
@@ -39,7 +40,8 @@
           iconDiv.style.height = '20px';
           iconDiv.style.backgroundImage = 'url(/uploads/db4787/original/1X/4f39ad0e50e8edea643f4fd6b6cc2ba5c91a32b8.png)';
           iconDiv.style.backgroundSize = 'cover';
-          iconDiv.style.zIndex = '2';
+          iconDiv.style.zIndex = '3';  // Adjust z-index to ensure icon overlays gradient border
+          
           element.appendChild(iconDiv);
 
           console.log('Couleur de la bordure, icône et bord arrondi ajoutés pour le sujet créé par', topicCreatorUsername);
