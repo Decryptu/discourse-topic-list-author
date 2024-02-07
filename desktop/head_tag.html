@@ -4,11 +4,13 @@
   api.modifyClass('component:topic-list-item', {
     didInsertElement() {
       this._super(...arguments);
-      const topicCreatorUsername = this.get('topic.creator.username').toLowerCase();
+      const topicCreatorUsername = this.topic.creator.username.toLowerCase();
 
       console.log('Pseudo du créateur du sujet :', topicCreatorUsername);
 
       if (adminUsernames.includes(topicCreatorUsername)) {
+        // Since we cannot directly import Ember functionalities, we try to minimize direct Ember usage.
+        // Utilizing Discourse's API and the component lifecycle to achieve the desired outcome.
         Ember.run.scheduleOnce('afterRender', this, function() {
           const element = this.element.closest('.topic-list-item');
           
@@ -21,7 +23,7 @@
           iconDiv.style.height = '20px';
           iconDiv.style.backgroundImage = 'url(/uploads/db4787/original/1X/4f39ad0e50e8edea643f4fd6b6cc2ba5c91a32b8.png)';
           iconDiv.style.backgroundSize = 'cover';
-          iconDiv.style.zIndex = '3';  // Adjust z-index to ensure icon overlays any other element
+          iconDiv.style.zIndex = '3';
 
           element.appendChild(iconDiv);
 
