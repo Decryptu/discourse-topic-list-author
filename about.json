@@ -4,5 +4,8 @@
   "about_url": "https://github.com/Decryptu/discourse-topic-list-author",
   "license_url": "https://github.com/Decryptu/discourse-topic-list-author/blob/main/LICENSE",
   "authors": "Decrypt",
-  "theme_version": "2.2"
+  "theme_version": "2.3",
+  "assets": {
+    "common": "/common"
+  }
 }

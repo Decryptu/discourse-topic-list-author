@@ -501,4 +501,10 @@
    </div>
 
   {{/if}}
+
+  import insertSubscriptionButton from 'discourse-topic-list-author/common/insert-button';
+
+  api.onPageChange(() => {
+    insertSubscriptionButton.initialize();
+  });
 </script>
