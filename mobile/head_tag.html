@@ -2,6 +2,7 @@
   const adminUsernames = ['wil-teamcr', 'decrypt-teamcr', 'prof.chaine-teamcr', 'thomas-teamcr', 'cyp-teamcr', 'coban-teamcr', 'virtus-teamcr', 'robin-teamcr', 'vincent-ganne-teamcr', 'romcy-teamcr', 'thebat-teamcr'].map(username => username.toLowerCase());
 
   api.modifyClass('component:topic-list-item', {
+    pluginId: 'discourse-topic-list-author',
     didInsertElement() {
       this._super(...arguments);
       const topicCreatorUsername = this.topic.creator.username.toLowerCase();
