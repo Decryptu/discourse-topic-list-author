@@ -41,8 +41,7 @@
     if (api.getCurrentUser()) { // Ensure the user is logged in
       console.log("Adding 'Gérer mon abonnement' to user menu.");
       api.addQuickAccessProfileItem({
-        icon: "credit-card-alt",
-        class: "gerer-mon-abo",
+        icon: "fa-credit-card",
         href: "https://cryptoast.memberful.com/auth/sign_in",
         content: "Gérer mon abonnement"
       });
