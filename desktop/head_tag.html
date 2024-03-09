@@ -36,29 +36,7 @@
 
   console.log('Custom Discourse Plugin Loaded');
 
-  // Function to add the class to the <li> once it's in the DOM
-  function addClassToSubscriptionLink() {
-    const observer = new MutationObserver((mutations) => {
-      mutations.forEach((mutation) => {
-        mutation.addedNodes.forEach((node) => {
-          // Check if the added node is an LI and contains the link
-          if (node.tagName === 'LI' && node.querySelector('a[href="https://cryptoast.memberful.com/auth/sign_in"]')) {
-            node.classList.add('gerer-mon-abonnement');
-            observer.disconnect(); // Stop observing once the class is added
-          }
-        });
-      });
-    });
-
-    // Start observing
-    const config = { childList: true, subtree: true };
-    const userMenu = document.querySelector('.user-menu'); // Adjust selector as needed
-    if (userMenu) {
-      observer.observe(userMenu, config);
-    }
-  }
-
-  // Add Quick Access Profile Item for Subscription Management and observe changes
+  // Add Quick Access Profile Item for Subscription Management
   api.onPageChange(() => {
     if (api.getCurrentUser()) { // Ensure the user is logged in
       console.log("Adding 'Gérer mon abonnement' to user menu.");
@@ -67,8 +45,6 @@
         href: "https://cryptoast.memberful.com/auth/sign_in",
         content: "Gérer mon abonnement"
       });
-
-      addClassToSubscriptionLink();
     }
   });
 </script>
