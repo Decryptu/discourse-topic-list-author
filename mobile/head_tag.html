@@ -33,6 +33,20 @@
       }
     }
   });
+  
+  console.log('Custom Discourse Plugin Loaded');
+
+  // Add Quick Access Profile Item for Subscription Management
+  api.onPageChange(() => {
+    if (api.getCurrentUser()) { // Ensure the user is logged in
+      console.log("Adding 'Gérer mon abonnement' to user menu.");
+      api.addQuickAccessProfileItem({
+        icon: "pencil-alt",
+        href: "https://cryptoast.memberful.com/auth/sign_in",
+        content: "Gérer mon abonnement"
+      });
+    }
+  });
 </script>
 
 <script
