@@ -9,11 +9,10 @@
       console.log('Pseudo du créateur du sujet :', topicCreatorUsername);
 
       if (adminUsernames.includes(topicCreatorUsername)) {
-        // Since we cannot directly import Ember functionalities, we try to minimize direct Ember usage.
-        // Utilizing Discourse's API and the component lifecycle to achieve the desired outcome.
-        Ember.run.scheduleOnce('afterRender', this, function() {
+        // Schedule the function to run after render
+        requestAnimationFrame(() => {
           const element = this.element.closest('.topic-list-item');
-          
+
           // Creating and appending the PNG icon to the element
           const iconDiv = document.createElement('div');
           iconDiv.style.position = 'absolute';
