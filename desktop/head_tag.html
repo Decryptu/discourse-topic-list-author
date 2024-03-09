@@ -45,6 +45,14 @@
         href: "https://cryptoast.memberful.com/auth/sign_in",
         content: "Gérer mon abonnement"
       });
+
+      // Wait for the DOM to update
+      requestAnimationFrame(() => {
+        let link = document.querySelector('a[href="https://cryptoast.memberful.com/auth/sign_in"]');
+        if (link && link.parentElement.tagName === 'LI') {
+          link.parentElement.classList.add('gerer-mon-abonnement');
+        }
+      });
     }
   });
 </script>
