@@ -37,22 +37,27 @@
 
   console.log('Custom Discourse Plugin Loaded');
 
+  // Initialize a global flag to track if the button has been added
+  if (typeof window.hasAddedSubscriptionButton === 'undefined') {
+    window.hasAddedSubscriptionButton = false;
+  }
+
+  // Function to add the subscription management button
+  function addSubscriptionButton(api) {
+    if (!window.hasAddedSubscriptionButton && api.getCurrentUser()) {
+      console.log("Adding 'Gérer mon abonnement' to user menu.");
+      api.addQuickAccessProfileItem({
+        icon: "certificate",
+        href: "https://cryptoast.memberful.com/auth/sign_in",
+        content: "Gérer mon abonnement"
+      });
+      window.hasAddedSubscriptionButton = true;
+    }
+  }
+
   // Add Quick Access Profile Item for Subscription Management
   api.onPageChange(() => {
-    if (api.getCurrentUser()) { // Ensure the user is logged in
-      // Check if the button has already been added
-      const existingLink = document.querySelector('a[href="https://cryptoast.memberful.com/auth/sign_in"]');
-      if (!existingLink) { // If the button doesn't exist, add it
-        console.log("Adding 'Gérer mon abonnement' to user menu.");
-        api.addQuickAccessProfileItem({
-          icon: "certificate",
-          href: "https://cryptoast.memberful.com/auth/sign_in",
-          content: "Gérer mon abonnement"
-        });
-      } else {
-        console.log("'Gérer mon abonnement' button already exists.");
-      }
-    }
+    addSubscriptionButton(api);
   });
 </script>
 
